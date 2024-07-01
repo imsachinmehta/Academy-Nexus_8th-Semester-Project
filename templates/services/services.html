@@ -1,0 +1,129 @@
+ {% extends 'home/navbar.html'%}
+{% load static%} {% load humanize%}
+
+
+{% block title%}Services{% endblock %}
+
+{%block content %}
+{%for service in services%}
+
+<div class="service-info">
+    <section class="sec-class">
+        <h2>{{service.provider.first_name}} {{service.provider.last_name}}</h2>
+        <section class="sec-class">
+            <h2>{{service.title}}</h2>
+            <p>{{service.description}}</p>
+        </section>
+
+        <p>Skills:</p>
+        <ul>
+          {% for skill in service.provider.skills.all %}
+            <li>{{skill.skill}}</li>
+          {% endfor %}
+        </ul>
+        </section>
+
+    <section class="sec-class">
+        <h2>Pricing</h2>
+        <p>£{{service.price}}</p>
+    </section>
+
+    {% if service.provider != user%}
+    <section class="sec-class">
+        <h2>Contact Me</h2>
+        <a href="/personal_messages/{{service.provider.username}}/"><button class="chat-with">Chat with Provider</button></a>
+    {% elif service.provider == user %}
+        <a href="delete{{service.id}}/"><button class="delete-service">Delete</button></a>
+    {% endif %}
+    </section>
+    <div class="service-date">{{service.postedOn|naturaltime}}</div>
+    
+  </div>
+  {%endfor%}
+
+
+    <div id="myModal">
+        <form action="{% url "add-service" %}" method="post">
+
+        {% csrf_token %}
+        <label for="title">Service Title:</label>
+        <input type="text" id="title" name="title" required>
+        
+        <label for="description">Service Description:</label>
+        <textarea id="description" name="description" rows="4" required></textarea>
+        
+        <label for="skills">Skills:</label>
+        <select id="skills" name="skills" multiple>
+            {% for skill in user.skills.all %}
+            <option value="{{skill.id}}">{{skill}}</option>
+            {% endfor %}
+        </select>
+
+        <label for="price">Pricing:</label>
+        <input type="text" id="price" name="price" required>
+
+        <input type="submit" value="Submit">
+        </form>
+
+        <!-- Button to close the modal -->
+        <button id="closeDialogButton">Close</button>
+    </div>
+
+    <div id="overlay"></div>
+
+
+    <button id="openDialogButton">Offer New Service</button>
+</div>
+    <script>
+        var myModal = document.getElementById('myModal');
+        var overlay = document.getElementById('overlay');
+        var openDialogButton = document.getElementById('openDialogButton');
+        var closeDialogButton = document.getElementById('closeDialogButton');
+
+        // Open the modal when the button is clicked
+        openDialogButton.addEventListener('click', function() {
+            myModal.style.display = 'block';
+            overlay.style.display = 'block';
+        });
+
+        // Close the modal when the close button is clicked
+        closeDialogButton.addEventListener('click', function() {
+            myModal.style.display = 'none';
+            overlay.style.display = 'none';
+        });
+
+        // Close the modal if the overlay is clicked
+        overlay.addEventListener('click', function() {
+            myModal.style.display = 'none';
+            overlay.style.display = 'none';
+        });
+            document.addEventListener('DOMContentLoaded', function () {
+              const shapeContainer = document.getElementById('shape');
+          
+          for (let i = 1; i <= 50; i++) {
+            const liLeft = document.createElement('li');
+            liLeft.style.width = `${(i * 10) + 30}px`;
+            liLeft.style.height = `${(i * 10) + 30}px`;
+            liLeft.style.left = `${(i * 20) + 10}%`;
+            liLeft.style.bottom = `0`;
+            liLeft.style.animationDelay = `${i * 3}s`;
+            liLeft.style.animation = 'floating 10s infinite linear';
+            shapeContainer.appendChild(liLeft);
+          
+            const liRight = document.createElement('li');
+            liRight.style.width = `${(i * 20) + 30}px`;
+            liRight.style.height = `${(i * 20) + 30}px`;
+            liRight.style.right = `${(i * 20) + 10}%`;
+            liRight.style.bottom = '0';
+            liRight.style.animationDelay = `${i * 3}s`;
+            liRight.style.animation = 'floating 10s infinite linear';
+            shapeContainer.appendChild(liRight);
+            }
+
+            });
+
+    </script>
+    {% block extra_css%}
+    <link rel="stylesheet" href="{% static 'css/services/services.css' %}">
+    {% endblock %}
+{% endblock %}

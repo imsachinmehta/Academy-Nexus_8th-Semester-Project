@@ -1,0 +1,49 @@
+{% load static %}
+
+<html lang="en">
+<!DOCTYPE html>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home/navbar.css' %}">
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title%} {%endblock%}</title>
+</head>
+<body>
+    <div class="navbar-content">
+    <header class="navbar-header">
+        <a href="/"><img class="logo" src="{% static 'img/logo.png' %}" alt="logo"></a>
+        <nav>
+            <ul class="nav_links">
+                <li><a href="/marketplace">Marketplace</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/chatrooms">StudyRoom</a></li>
+                <li><a href="/personal_messages/">Messages</a></li>
+            </ul>
+        </nav>
+        
+        <div class="temp">
+            {% if user.is_authenticated%}
+            <a href="{% url 'profile' %}">
+                <p style="color: white;"> {{user.first_name}}</p>
+            </a>
+            <a class="navbar_right" href="/signout"><button class="Button">Logout</button></a>
+            {%else%}
+            <a class="navbar_right" href="/register"><button class="Button">Register</button></a>
+            <a class="navbar_right" href="/signin"><button class="Button">Signin</button></a>
+            {%endif%}
+        </div>
+        <!-- <a class="navbar_right" href="#"><button>Login</button></a> -->
+    </header>
+
+    {%block content%}
+    {%endblock%}
+
+</body>
+</html>

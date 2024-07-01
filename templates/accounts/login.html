@@ -1,0 +1,33 @@
+{%load static%}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Page</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/accounts/styles.css' %}"> <!-- Create a separate CSS file -->
+  <link rel="icon" type="x-icon" href="favicon.ico">
+</head>
+<body>
+  
+  <div class="container">
+    <h2>Login</h2>
+
+    {%if messages%}
+        {%for message in messages%}
+            <p style="color:red;">{{message}}</p>
+        {%endfor%}
+    {%endif%}
+    
+    <form id="loginForm" method="post">
+        {%csrf_token%}
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+      <input type="submit" value="Log In" href="{% url 'signin' %}?next={% firstof request.path '/' %}">
+      
+    </form>
+    <a href="/register" style="text-align:right; color:seagreen;" >Register Here</a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,208 @@
+a {
+  text-decoration: none;
+}
+.post-content {
+    position: relative;
+    top: 80px;
+    z-index: 1;
+    background-color: #fcf8f8;
+    width: 53%; 
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.post-body {
+    color: rgb(64, 63, 63);   
+    text-align: left;
+}
+
+.post-container {
+  position: relative;
+    padding: 15px;
+    width: 98%;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    flex: .5;
+    background-color: #fff;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.post-container:hover {
+  transform: scale(1.02); /* Increase size on hover */
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.2); /* Add a subtle shadow on hover */
+}
+.post-title {
+    font-size: 19px;
+    margin: 0px;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+}
+
+.author {
+    font-size: 14px;
+    color: #108c91;
+    margin-bottom: 5px;
+}
+
+.post-score {
+    font-size: 14px;
+    color: #0c6c8a;
+}
+
+.comments {
+    font-size: 14px;
+    color: #0c727f;
+    cursor: pointer;
+    text-align: right;
+    font-size: 12px;
+}
+
+.post-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.author,
+.post-date {
+  margin: 0;
+}
+
+
+.post-content {
+    font-size: 16px;
+    color: #158c91;
+}
+
+.post-image {
+    display: flex;
+    max-width: 100%;
+    margin-bottom: 10px;
+    align-content: right;
+}
+
+.post-date {
+    align-self: flex-end;
+    font-size: 12px;
+    color: #0d718f;
+    margin-top: 10px;
+}
+
+.submit {
+    font-size: 8;
+    width: 5px;
+    height: 5px;
+    display: flex;
+    margin-top: 5px;
+}
+
+.comment-form {
+    width: 100%;
+    height: auto;
+    resize: vertical;
+  }
+
+.comment-list {
+    margin-bottom: 20px;
+  }
+
+header {
+    background-color: white;
+    padding: 10px;
+    text-align: center;
+    color: #158c91;
+  }
+
+  article {
+    float: left;
+    padding: 20px;
+    width: auto;
+    background-color: white;
+    height: 300px; 
+  }
+
+  .new-post-button {
+    position: fixed;
+    bottom: 30px; 
+    right: 30px; 
+    z-index: 999;
+    background-color:rgb(33, 125, 125);
+    color: white; 
+    padding: 15px 32px; 
+    border: none; 
+    border-radius: 15px; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease-in-out;
+  }
+
+ .delete {
+  position: absolute;
+  top: 2; /* Adjust top position as needed */
+  right: 0; /* Align to the right */
+  color: black;
+  padding: 1px 2px;
+  border: 1px solid rgb(33, 125, 125);
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: small;
+}
+
+.delete:hover {
+    color: #000000;
+    background-color: lightseagreen;
+}
+  
+  /* Hover effect */
+  .new-post-button:hover {
+    background-color: lightseagreen;
+  }
+
+  .swiper-container {
+    width: 100%;
+    position: relative;
+    overflow: hidden; /* Ensure only one image is visible at a time */
+  }
+  
+  .swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .swiper-slide img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block; /* This ensures that the image is centered properly */
+    margin: auto;   /* This centers the image */
+  }
+  
+  .swiper-button-next,
+  .swiper-button-prev {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+    display: none; /* Initially hide the arrows */
+  }
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+      content: '\203A'; /* Unicode character for right arrow */
+      color: lightseagreen; /* Adjust the color as needed */
+  }
+  .popup {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: lightseagreen;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

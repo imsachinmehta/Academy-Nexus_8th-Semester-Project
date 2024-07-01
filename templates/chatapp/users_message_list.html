@@ -1,0 +1,57 @@
+{%extends 'home/navbar.html'%}
+{%block content%}
+        <style>
+
+            
+            header {
+                background-color: #fff;
+                color: #000;
+                padding: 10px;
+                text-align: center;
+                position: relative;
+                top: 100px;
+                z-index: 100;
+            }
+            
+            .user-list {
+                list-style: none;
+                padding: 0;
+                margin: 20px;
+                background-color: #756453;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                position: relative;
+                top: 100px;
+                z-index: 100;
+            }
+            
+            .user-list-item {
+                color: #000;
+                padding: 15px;
+                border-bottom: 1px solid #ddd;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+            
+            .user-list-item:last-child {
+                border-bottom: none;
+            }
+            
+            .user-list-item:hover {
+                background-color: #555;
+            }
+        </style>
+        <header>
+            <h1>User List</h1>
+        </header>
+        <ul class="user-list">
+        {%for user in list_of_users%}
+            <li class="user-list-item">
+            <a href="/personal_messages/{{user.username}}">
+                {{user.first_name}} {{user.last_name}}
+            </a>
+            </li>
+        {%endfor%}
+        
+    </ul>
+{%endblock%}

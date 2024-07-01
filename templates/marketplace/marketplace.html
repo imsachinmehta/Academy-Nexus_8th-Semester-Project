@@ -1,0 +1,168 @@
+{%extends 'home/navbar.html'%}
+{% load static%} 
+
+
+{% load static %}
+
+  {% block title%}Marketplace{% endblock %}
+
+
+{%block content %}
+  {% for product in products%}
+  <div class="product">
+    <h2>Seller: {{product.seller.first_name}} {{product.seller.last_name}}</h2>
+    <h3>Product: {{product.name}}</h3>
+    <p>Product Description: {{product.description}}</p>
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+          {% for imageobj in product.product.all %}
+              <div class="swiper-slide">
+                  <img class="product-image" style="height: 220px; width: 320px;" src="{{ imageobj.image.url }}" alt="Product Image">
+              </div>
+          {% endfor %}
+      </div>
+      <!-- Add Navigation -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+  </div>
+    <p>Product Condition: {{product.condition}}</p>
+    <p>Product Price: £{{product.price}}</p>
+
+    <a href="/personal_messages/{{product.seller.username}}/"><button class="chat-with">Chat with Seller</button></a>
+
+    <div class="toggle-button" onclick="toggleContent(this)">Show More</div>
+    <div class="toggle-content">
+      <p>Seller Information:</p>
+      <p>Email:{{product.seller.email}}</p>
+      {% if product.seller == user%}
+      <a href="{% url 'delete-product' product.id %}">Delete Product</a>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+
+  <div id="myModal">
+    <form action="{%url 'add-product'%}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <label for="name">Product Name</label>
+    <textarea id="name" name="name" required></textarea>
+
+    <label for="description">Product Description</label>
+    <textarea id="description" name="description" rows="4" required></textarea>
+
+    <label for="price">Price</label>
+    <input type="text" id="price" name="price" required>
+
+    <label for="condition">Product Condition:</label>
+    <select id="condition" name="condition">
+      <option value="brandNew">Brand New</option>
+      <option value="likeNew">Like New</option>
+      <option value="used">Used</option>
+    </select>
+
+
+    <label for="images">Add Product Image</label>
+    <input type="file" id="images" name="product_images" accept=".jpg, .jpeg, .png" multiple>
+
+    <input type="submit" value="Submit">
+    </form>
+
+    <!-- Button to close the modal -->
+    <button id="closeDialogButton">Close</button>
+</div>
+</div>
+<div id="overlay"></div>
+
+  <button id="openDialogButton">Sell a Product</button>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+  function toggleContent(button) {
+    var content = button.nextElementSibling;
+    content.style.display = (content.style.display === "none") ? "block" : "none";
+    button.innerHTML = (content.style.display === "none") ? "Show More" : "Show Less";
+  }
+  var myModal = document.getElementById('myModal');
+        var overlay = document.getElementById('overlay');
+        var openDialogButton = document.getElementById('openDialogButton');
+        var closeDialogButton = document.getElementById('closeDialogButton');
+
+        // Open the modal when the button is clicked
+        openDialogButton.addEventListener('click', function() {
+            myModal.style.display = 'block';
+            overlay.style.display = 'block';
+        });
+
+        // Close the modal when the close button is clicked
+        closeDialogButton.addEventListener('click', function() {
+            myModal.style.display = 'none';
+            overlay.style.display = 'none';
+        });
+
+        // Close the modal if the overlay is clicked
+        overlay.addEventListener('click', function() {
+            myModal.style.display = 'none';
+            overlay.style.display = 'none';
+        });
+        //swiper script
+        document.addEventListener('DOMContentLoaded', function () {
+          // Initialize Swiper
+          var swiper = new Swiper('.swiper-container', {
+              slidesPerView: 1,
+              spaceBetween: 10,
+              navigation: {
+                  nextEl: '.swiper-button-next',
+                  prevEl: '.swiper-button-prev',
+              },
+          });
+  
+          // Show/hide navigation arrows based on the number of slides
+          if (swiper.slides.length > 1) {
+              swiper.navigation.$nextEl.css('display', 'block');
+              swiper.navigation.$prevEl.css('display', 'block');
+          }
+  
+          // Toggle arrows on slide change
+          swiper.on('slideChange', function () {
+              if (swiper.slides.length > 1) {
+                  swiper.navigation.$nextEl.css('display', 'block');
+                  swiper.navigation.$prevEl.css('display', 'block');
+              } else {
+                  swiper.navigation.$nextEl.css('display', 'none');
+                  swiper.navigation.$prevEl.css('display', 'none');
+              }
+          });
+      });
+        document.addEventListener('DOMContentLoaded', function () {
+          const shapeContainer = document.getElementById('shape');
+      
+      for (let i = 1; i <= 50; i++) {
+        const liLeft = document.createElement('li');
+        liLeft.style.width = `${(i * 10) + 30}px`;
+        liLeft.style.height = `${(i * 10) + 30}px`;
+        liLeft.style.left = `${(i * 20) + 10}%`;
+        liLeft.style.bottom = `0`;
+        liLeft.style.animationDelay = `${i * 3}s`;
+        liLeft.style.animation = 'floating 10s infinite linear';
+        shapeContainer.appendChild(liLeft);
+      
+        const liRight = document.createElement('li');
+        liRight.style.width = `${(i * 20) + 30}px`;
+        liRight.style.height = `${(i * 20) + 30}px`;
+        liRight.style.right = `${(i * 20) + 10}%`;
+        liRight.style.bottom = '0';
+        liRight.style.animationDelay = `${i * 3}s`;
+        liRight.style.animation = 'floating 10s infinite linear';
+        shapeContainer.appendChild(liRight);
+      }
+      
+      });
+      
+</script>
+
+  {% block extra_css%}
+    <link rel="stylesheet" href="{% static 'css/marketplace/marketplace.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  {% endblock %}
+{% endblock %}

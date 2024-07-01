@@ -1,0 +1,144 @@
+/* Add the following styles to your existing CSS file */
+
+body {
+    margin: 0 auto;
+    padding: 0;
+    font-family: 'JetBrains Mono', sans-serif;
+    background-color: #f4f4f4;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 20px auto;
+    margin-top: 0px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+
+  
+  header {
+    background-color: #333;
+    color: #fff;
+    padding: 15px 20px;
+  }
+  
+  .post-title {
+    margin: 0;
+  }
+  
+  article {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .post-body {
+    max-width: 80%; /* Set your preferred max width */
+    margin: 0 auto; /* Center the container */
+    padding: 20px; /* Add padding for spacing */
+    background-color: #fff; /* Set a background color if needed */
+    border-radius: 8px; /* Add border-radius for rounded corners */
+    font-size: 18px;
+  }
+  
+  .post-image {
+    max-width: 100%;
+    height: 200px; /* Set your desired fixed height */
+    object-fit: cover;
+    border-radius: 8px;
+
+  }
+  
+  .author,
+  .post-date {
+    color: #5b5a5a;
+    margin-top: 10px;
+  }
+  
+  .Comments {
+    color: black;
+    font-size: 14px;
+  }
+  
+  #CommentForm {
+    margin-top: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+  }
+  
+  input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+ .display-comment, input[type="submit"] {
+    background-color:rgb(33, 125, 125);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .display-comment, input[type="submit"]:hover {
+    background-color: lightseagreen;
+  }
+  
+  .comment_container {
+    border: 1px solid #333;
+    margin: 3px;
+    padding: 2px;
+  }
+
+  #hideContent {
+    display: none;
+  }
+
+    /* Responsive Styles */
+    @media only screen and (max-width: 768px) {
+      article {
+        padding: 10px;
+      }
+    
+      .post-body {
+        font-size: 14px;
+      }
+    }
+
+    section {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100%;
+      overflow: auto;
+      background-color: #333;
+    }
+    
+    
+    
+    
+    @keyframes floating {
+      from {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+    }
+    
+    to {
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+        border-radius: 80%;
+    }
+    }

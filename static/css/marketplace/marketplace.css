@@ -1,0 +1,225 @@
+
+body {
+    font-family: "JetBrains Mono", sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+  
+  }
+
+  .product {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    max-width: 800px;
+    transition: transform 0.2s ease-in-out;
+    margin: 0 auto; /* Center the post-content */
+    border-radius: 8px;
+    position: relative;
+    top: 80px;
+    z-index: 100;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    }
+
+  .product:hover {
+    transform: scale(1.05);
+  }
+
+  .product img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    margin: 0 auto;
+  }
+
+  .toggle-button {
+    cursor: pointer;
+    color: #007bff;
+    text-decoration: underline;
+  }
+
+  .toggle-content {
+    display: none;
+  }
+
+  .new-post-button {
+    position: fixed; /* Fixes the button's position on the screen */
+    bottom: 30px; /* Adjust the distance from the bottom of the screen */
+    right: 30px; /* Adjust the distance from the right edge of the screen */
+    z-index: 999;
+    background-color:rgb(33, 125, 125);/* Green background */
+    color: white; /* White text */
+    padding: 15px 32px; /* Button padding */
+    border: none; /* Remove border */
+    border-radius: 15px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  /* Hover effect */
+  .new-post-button:hover {
+    background-color: lightseagreen;
+  }
+
+  input[type="submit"] {
+    background-color:rgb(33, 125, 125);
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    color: #000000;
+    background-color: lightseagreen;
+}
+  @media screen and (max-width: 600px) {
+    h1 {
+        font-size: 1.5em;
+    }
+
+    h2 {
+        font-size: 1.2em;
+    }
+}
+ #openDialogButton {
+    position: fixed; /* Fixes the button's position on the screen */
+    bottom: 30px; /* Adjust the distance from the bottom of the screen */
+    right: 30px; /* Adjust the distance from the right edge of the screen */
+    z-index: 999;
+    background-color:rgb(33, 125, 125); /* Green background */
+    color: white; /* White text */
+    padding: 15px 20px; /* Button padding */
+    border: none; /* Remove border */
+    border-radius: 15px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+  }
+  
+  /* Hover effect */
+#openDialogButton:hover {
+    color: #000000;
+    background-color: lightseagreen;
+  }
+
+  /* Style for the dialog */
+#myDialog {
+    display: none;
+}
+#myModal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 900;
+}
+
+#closeDialogButton {
+    cursor: pointer;
+    padding: 5px;
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: vertical;
+}
+
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    margin: 0 auto;
+    overflow-y: auto; /* Enable vertical scrollbar if content overflows */
+    max-height: 80vh; 
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+.swiper-container {
+  width: 100%;
+  height:auto;
+  position: relative;
+  overflow: hidden; /* Ensure only one image is visible at a time */
+}
+
+.swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swiper-slide img {
+  max-width: 100%;
+  max-height: 100%;
+  display: block; /* This ensures that the image is centered properly */
+  margin: auto;   /* This centers the image */
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+  color: #fff;
+  padding: 10px;
+  cursor: pointer;
+  display: none; /* Initially hide the arrows */
+}
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    content: '\203A'; /* Unicode character for right arrow */
+    color: lightseagreen; /* Adjust the color as needed */
+}
+
+.chat-with {
+  background-color:rgb(33, 125, 125);
+  color: white;
+  padding: 2px 2px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.chat-with:hover {
+  color: #000000;
+  background-color: lightseagreen;
+}

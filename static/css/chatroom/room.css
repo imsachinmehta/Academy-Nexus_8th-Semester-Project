@@ -1,0 +1,48 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+form, .chat-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 3px solid rgb(33, 125, 125);
+    border-radius: 10px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+.chat-container {
+    height: 400px;
+}
+
+input {
+    width: 70%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 3px solid rgb(33, 125, 125);
+    border-radius: 5px;
+}
+h2 {
+    text-align: center;
+}
+
+.message {
+    text-align: left;
+    background-color: #f6f6f6;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.username {
+    font-weight: bold;
+    font-size:18px;
+    color: rgb(33, 125, 125);
+    /* margin: 0; */
+}
+
+.content {
+    /* margin: 0; */
+    font-size:15px;
+}

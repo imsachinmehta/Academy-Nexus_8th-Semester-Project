@@ -1,0 +1,34 @@
+{%extends 'home/navbar.html'%}
+
+{% load static %}
+
+  {% block title%}{{room.name}}{% endblock %}
+
+
+{%block content %}
+<h2>{{room.name}}<h2> <br>
+
+<div class="chat-container" id="chat-box">
+    {% for message in messages %}
+    <div class="message">
+        <p class="username">{{ message.user.username }}</p>
+        <p class="content">{{message}}</p>
+    </div>
+    {% endfor %}
+  </div>
+    <form method="POST" action="." class = "formclass">
+        {% csrf_token %}
+        <input type="text" name="message" placeholder="Enter message" id="input-message">
+        <button type="submit" id="chat-message-submit">Send</button>
+    </form>
+{{ room.slug|json_script:"room-slug"}}
+{{ request.user.username|json_script:"user-name" }}
+
+{% block extra_css%}
+    <link rel="stylesheet" href="{% static 'css/chatroom/room.css' %}">
+  {% endblock %}
+    
+  <script src="{% static 'js/room.js' %}"></script> 
+
+
+{% endblock%}

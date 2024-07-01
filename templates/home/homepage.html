@@ -1,0 +1,87 @@
+{% extends 'home/navbar.html' %}
+{% load static %} {% load humanize %} {% load custom_filter %}
+
+{% block title %}Homepage{% endblock %}
+
+{% block content %}
+
+  {% for post in posts %}
+<div class="post-content">
+    <div class="post-container">
+        {% if user.is_authenticated and post.author == user %}
+        <form method="post" action="/deletepost{{post.id}}/">
+            {% csrf_token %}
+            <button type="submit" onclick="showDeletePopup()" class="delete">Delete</button>
+        </form>
+        <div id="delete-popup" class="popup">
+            <p>Deleted Successfully!</p>
+        </div>
+        {% endif %}
+        <a href="/post{{post.id}}">
+            <h2 class="post-title">{{post.title}}</h2>
+            <p class="post-body">{{post.body}}</p>
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    {% for imageobj in post.post.all %}
+                    <div class="swiper-slide">
+                        <img class="post-image" style="height: 300px; width: auto;"
+                            src="{{imageobj.image.url}}" alt="Post Image">
+                    </div>
+                    {% endfor %}
+                </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div> 
+            </div>
+              <p class="author">{{post.author}}</p>
+              <p class="post-date">{{post.postedOn|naturaltime}}</p>
+              <p class="comment-count" style="color:black">Comments:{{post.commentCount}}</p>
+            </div>
+            </div>
+        </a>
+  </div> 
+  {%endfor%}
+<a href="/addpost/"><button class="new-post-button">New Post</button></a>
+
+<script src="https://sunpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+ document.addEventListener('DOMContentLoaded', function () {
+     var swiper = new Swiper('.swiper-container', {
+         slidesPerView: 1,
+         spaceBetween: 10,
+         navigation: {
+             nextEl: '.swiper-button-next',
+             prevEl: '.swiper-button-prev',
+         },
+     });
+
+     if (swiper.slides.length > 1) {
+         swiper.navigation.$nextEl.css('display', 'block');
+         swiper.navigation.$prevEl.css('display', 'block');
+     }
+
+     swiper.on('slideChange', function () {
+         if (swiper.slides.length > 1) {
+             swiper.navigation.$nextEl.css('display', 'block');
+             swiper.navigation.$prevEl.css('display', 'block');
+         } else {
+             swiper.navigation.$nextEl.css('display', 'none');
+             swiper.navigation.$prevEl.css('display', 'none');
+         }
+     });
+ });
+
+    function showDeletePopup() {
+        var popup = document.getElementById("delete-popup");
+        popup.style.display = "block";
+        setTimeout(function () {
+            popup.style.display = "none";
+        }, 3000);
+    }
+
+</script>
+
+    {% block extra_css %}
+        <link rel="stylesheet" href="{% static 'css/home/homepage.css' %}">
+        <link rel="stylesheet" href="https://sunpkg.com/swiper/swiper-bundle.min.css" />
+    {% endblock %}
+{% endblock %}

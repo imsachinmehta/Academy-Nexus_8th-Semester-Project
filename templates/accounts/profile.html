@@ -1,0 +1,276 @@
+{%extends 'home/navbar.html'%}
+{%block content%} {% load custom_filter %}
+<style>
+    /* Add your CSS styles here */
+    /* General styling */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  top: 100px;
+  z-index: 100;
+}
+
+/* Section styling */
+section {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+h2 {
+  color: black;
+  text-align: center;
+}
+
+/* Posts styling */
+.post-content {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: #fff;
+  width:700px;
+  margin: 0 auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+}
+
+.post-title {
+  color: #007BFF;
+  margin-bottom: 10px;
+}
+
+.post-body {
+  color: #333;
+}
+
+.post-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.comments {
+  color: #007BFF;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+/* Rooms styling */
+.room {
+  width: 700px;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+}
+
+.room h3 {
+  color: rgb(33, 125, 125);
+  margin-bottom: 10px;
+}
+
+.room p {
+  color: #333;
+}
+
+/* Comments styling */
+.comment {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #f8f9fa;
+}
+
+/* Edit Profile styling */
+
+.edit-profile-form input,
+.edit-profile-form textarea {
+  border: 1px solid #ddd; /* Add border style */
+   border-radius: 8px; /* If you want to remove border-radius as well */
+   outline: none; /* Remove the outline when focused */
+   padding: 8px;
+   margin-bottom: 10px;
+}
+
+
+.edit-profile-form label {
+ margin-bottom: 5px;
+ font-weight: bold;
+ text-align: left; /* Align labels to the left */
+}
+
+#edit-profile {
+  width: 400px; /* Adjust the width as needed */
+  margin: 0 auto; /* Center the section */
+  border: 1px solid #ddd;
+  padding: 15px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px; /* Add some top margin for separation */
+  text-align: left;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  background-color:rgb(33, 125, 125);
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+
+}
+
+#upload-profile {
+  margin:0 auto;
+  text-align: center; 
+  padding: 20px; 
+  border: 1px solid #ccc;
+}
+
+#update-profile {
+  width:250px;
+  margin:50px auto;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.save-changes {
+  background-color: rgb(33, 125, 125);
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  align-self: center;
+  margin-top: 10px;
+}
+
+.save-changes:hover {
+  background-color: #0056b3;
+}
+
+#posts, #rooms, #comments, #edit-profile {
+  display: none;
+}
+#profile-picture-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#profile-picture {
+  max-width: 200px;
+  max-height: 200px;
+  border-radius: 50%;
+}
+
+    /* Add more styles as needed for other form elements */
+</style>
+
+<script>
+  function toggleSection(sectionId) {
+    // Hide all sections
+    var sections = document.querySelectorAll('section');
+    sections.forEach(function(section) {
+      section.style.display = 'none';
+    });
+
+    // Show the selected section
+    var section = document.getElementById(sectionId);
+    section.style.display = 'block';
+  }
+</script>
+  <header>
+    <h1>User Profile</h1>
+    <p>Welcome, {{ user.username }}!</p>
+    {% if user.image %}
+    <div id="profile-picture-container">
+      {% if user.image %}
+      <img src="{{user.image.url}}" alt="Profile Picture" style="height: 300px; width: auto;">
+    {% endif %}
+    </div>
+    {% endif %}
+    <button onclick="toggleSection('posts')">Posts</button>
+    <button onclick="toggleSection('rooms')">Rooms</button>
+    <button onclick="toggleSection('edit-profile')">Edit Profile</button>
+    <button onclick="toggleSection('upload-profile')">Upload Profile Picture</button>
+  </header>
+
+  <section id="posts">
+    <h2>Your Posts</h2>
+    {%for post in user.author.all%}
+  <div class="post-content">
+    <div class="post-container">
+      <a href="/post{{post.id}}">
+      <h2 class="post-title">{{post.title}}</h2>
+      <p class="post-body">{{post.body}}</p>
+      {%for imageobj in post.post.all %}
+      <img class="post-image" style="height: 300px; width: auto;" src="{{imageobj.image.url}}" alt="Post Image">
+      {%endfor%}
+      {%for fileobj in post.post_file.all%}
+      <p>{{ fileobj.file.name|filename}}</p>
+      <a style="color:black;" href="{{ fileobj.file }}" download>Download PDF</a>
+      {%endfor%}
+      <a href="/post{{post.id}}"> <p class="comments" id="comments">{{post.commentCount}} <i class="fa fa-comment" aria-hidden="true" style="font-size:24px;"></i> </p>
+      </a>
+      <p class="post-date">Posted on {{post.postedOn}}</p>
+
+      <a href="{% url 'delete-post' post.id %}"> </a>
+        <button>Delete</button>
+    </div>
+    <a href="{% url 'delete-post' post.id %}"> 
+      <button style="font-size:small;">Delete</button> </a>
+  </div> 
+  {%endfor%}
+  </section>
+
+  <section id="rooms">
+    <h2>Your Rooms</h2>
+    {% for room in user.creator.all %}
+      <div class="room">
+        <h3>{{ room.name }}</h3>
+        <p>{{ room.description }}</p>
+        <button><a href="delete/{{room.slug}}/">Delete</a></button>
+      </div>
+    {% endfor %}
+  </section>
+
+ <section id="edit-profile">
+    <h2>Edit Profile</h2>
+    {% if user.image %}
+      <img src="{{user.image.url}}" alt="Profile Picture" style="height: 100px; width: auto;">
+    {% endif %}
+    {% if messages%}
+      {%for message in messages%}
+        {{message}}
+      {%endfor%}
+    {%endif%}
+    <form method="post" action="{% url 'profile' %}" class="edit-profile-form">
+      {% csrf_token %}
+      {{form.as_p}}
+      <label for="skills">Skills:(spereated by commas)</label>
+      <textarea id="skills" name="skills" rows="4" required></textarea>
+      <button type="submit" class="save-changes">Save Changes</button>
+    </form>
+  </section>
+
+<section id="upload-profile">
+    <h2>Upload Profile</h2>
+    <!-- Add a form for editing user information -->
+    <form method= "post" action="{% url 'update-profile-pic' %}" enctype="multipart/form-data">
+      {% csrf_token %}
+      <label for="image">Update Profile Picture</label>
+      <input type="file" id="image" name="image" accept=".jpg, .jpeg, .png">
+      <button id="update-profile" type="submit">Update</button>
+    </form>
+  </section>
+
+{%endblock%}

@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Register Page</title>
+<link rel="stylesheet" type="text/css" href="{% static 'css/accounts/styles.css' %}"> <!-- Create a separate CSS file -->
+<link rel="icon" type="x-icon" href="favicon.ico">
+</head>
+<body>
+
+
+
+<div class="container1">
+    {%if messages%}
+      {%for message in messages%}
+        {{message}}
+      {%endfor%}
+    {%endif%}
+<div class="container">
+    <div class="child">
+      <h2>Register</h2>
+      <form id="RegisterForm" method="post">
+      {% csrf_token %}
+      {{form.errors}}
+      <div class="input">
+        <label for="id_first_name">Firstname</label>
+        <input type="text" id="id_first_name" name="first_name" required>
+      </div>
+      <div class="input">
+        <label for="id_last_name">Lastname</label>
+        <input type="text" id="id_last_name" name="last_name" required>
+      </div>
+      <div class="input">
+        <label for="id_username">Username:</label>
+        <input type="text" id="id_username" name="username" required>
+      </div>
+      <div class="input">
+        <label for="id_email">Email:</label>
+        <input type="text" id="id_email" name="email" required>
+      </div>
+      <div class="input">
+        <label for="id_password">Password:</label>
+        <input type="password" id="id_password" name="password" required>
+      </div>
+      <div class="input">
+        <label for="id_confirm_password">Confirm Password:</label>
+        <input type="password" id="id_confirm_password" name="confirm_password" required>
+      </div>
+      <input type="submit" value="Register" href="/register">
+      <p> Already a memeber?</p>
+      <a href="/signin" style="text-align:right; color:seagreen;" >Login here</a>
+        </form>
+    </div>
+</div>
+</body>
+</html>

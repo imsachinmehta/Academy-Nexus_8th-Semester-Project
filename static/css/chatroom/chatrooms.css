@@ -1,0 +1,64 @@
+/* chatrooms.css */
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 20px;
+    position: relative;
+    top: 100px;
+    z-index: 100;
+  }
+  
+  .incontainer {
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.2s ease-in-out;
+    width: 250px; /* Fixed width for each room container */
+  }
+  
+  .incontainer:hover {
+    transform: scale(1.05);
+  }
+  
+  h3 {
+    color: #333;
+  }
+  
+  button {
+    background-color:rgb(33, 125, 125);
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    background-color: #008fb3;
+  }
+  
+  .new-post-button {
+    position: fixed; /* Fixes the button's position on the screen */
+    bottom: 30px; /* Adjust the distance from the bottom of the screen */
+    right: 30px; /* Adjust the distance from the right edge of the screen */
+    z-index: 999;
+    background-color:rgb(33, 125, 125);/* Green background */
+    color: white; /* White text */
+    padding: 15px 32px; /* Button padding */
+    border: none; /* Remove border */
+    border-radius: 15px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .new-post-button:hover {
+    background-color: lightseagreen;
+  }
+  

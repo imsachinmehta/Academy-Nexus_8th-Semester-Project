@@ -1,0 +1,91 @@
+{%extends 'home/navbar.html'%}
+{% load static %}
+ {% block title%}Lets chat{% endblock %}
+
+{%block content%}
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      position: relative;
+      top: 100px;
+      z-index: 100;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      overflow: hidden;
+    }
+
+    .chat-box {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin: 20px;
+      padding: 20px;
+      height: 400px;
+      overflow-y: scroll;
+    }
+
+    .message {
+      margin-bottom: 20px;
+      padding: 10px;
+      border-radius: 4px;
+    }
+
+    .user-message {
+      background: #e0f7fa;
+      text-align: right;
+    }
+
+    .other-message {
+      background: #fce4ec;
+    }
+
+    .message input {
+      width: 80%;
+      padding: 8px;
+      margin-right: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .message button {
+      padding: 8px;
+      border: 1px solid #3498db;
+      border-radius: 4px;
+      background: #3498db;
+      color: #fff;
+      cursor: pointer;
+    }
+  </style>
+  <h2> Chat with: {{receiver.username}}{{username}}</h2>
+  <div class="container">
+    <div class="chat-box" id="chatBox">
+      {% for message in messages%}
+        {% if message.sender == receiver%}  
+          <div class="message other-message">{{message.content}}</div>
+        {% else %}
+        <div class="message user-message">{{message.content}}</div>
+        {% endif %}
+      
+      {% endfor %}
+    </div>
+
+    <div class="message">
+      <input type="text" id="userInput" placeholder="Type your message...">
+      <button id="chat-message-submit">Send</button>
+    </div>
+  </div>
+  {% if username %}
+  {{ username|json_script:"provider-username" }}
+{% elif receiver.username %}
+  {{ receiver.username|json_script:"provider-username" }}
+{% endif %}
+
+  <script src="{% static 'js/chat.js' %}"></script> 
+
+{%endblock%}

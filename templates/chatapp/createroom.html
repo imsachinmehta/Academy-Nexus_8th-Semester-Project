@@ -1,0 +1,69 @@
+{% extends 'home/navbar.html'%}
+{% load static %}
+
+{% block content %}
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        position: relative;
+        top: 100px;
+        z-index: 100;
+      }
+      
+      
+      .post-form {
+        max-width: 600px;
+        margin: 20px auto;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+      }
+      
+      label {
+        display: block;
+        margin-bottom: 10px;
+      }
+      
+      input[type='text'],
+      textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      
+      input[type='file'] {
+        margin-top: 10px;
+      }
+      
+      input[type='submit'] {
+        background-color:rgb(33, 125, 125);
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      
+      input[type='submit']:hover {
+        background-color: lightseagreen;      }
+    </style>
+    <h2>Create Room</h2>
+    <div class="post-form">
+      <form method="post" action="{% url 'create-room' %}">
+        {% csrf_token %}
+        <label for="name">Room Name:</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="4" required></textarea>
+
+        <input type="submit" value="Create" />
+      </form>
+    </div>
+{% endblock %}

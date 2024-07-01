@@ -1,0 +1,61 @@
+{% extends 'home/navbar.html'%} 
+
+
+{%load static%}
+<header>
+    <h2 class="post-title">{{post.title}}</h2>
+{% block content%}
+
+<header>
+  <h2 class="post-title">{{post.title}}</h2>
+</header>
+
+<br>
+<article>
+  <p class="post-body">{{post.body}}</p>
+</article>
+<div class="container">
+  <br>
+  <br>
+  {%for imageobj in post.post.all %}
+    <img class="post-image" style="height: 300px; width: auto;" src="{{imageobj.image.url}}" alt="Post Image">
+    {%endfor%}
+    {%for fileobj in post.post_file.all%}
+    <a style="color:black;" href="{{ fileobj.file }}" download>Download PDF</a>
+  {%endfor%}
+<p class="post-date">{{post.postedOn}} by {{post.author}}</p>
+<br>
+<h4>COMMENTS:</h4>
+<form id="CommentForm" method="post" action="/addcomment{{post.id}}/">
+  {% csrf_token %}
+  <label for="comment">Add comment</label>
+  <input type="text" id="id_comment" name="comment-content">
+  <input type="submit"  value="Comment">
+</form>
+
+{%if comments %}
+{% comment %} <button class="display-comment" onclick="toggleContent()">Comment</button>
+
+<div id="hideContent">
+  
+</div> {% endcomment %}
+<br>
+    {%for comment in comments%}
+  <div class="comment_container"> 
+    <p class="Comments">{{comment.content}}</p>
+    <br>
+    <p style="font-size: 12px;">posted by: {{comment.author}} on {{comment.postedOn}}</p>
+  </div>
+    {% endfor %}
+  
+      
+{%endif%}
+
+
+</div>
+</div>
+    {% block extra_css%}
+    <link rel="stylesheet" href="{% static 'css/home/post.css' %}">
+    {% endblock %}
+{% endblock %}
+

@@ -1,0 +1,30 @@
+{%extends 'home/navbar.html'%}
+
+{% load static %}
+
+  {% block title%}chatroom{% endblock %}
+
+
+{%block content %}
+<h2>Avaliable chatrooms<h2> <br>
+  <div class="container">
+    {% for room in rooms %}
+        <div class="incontainer">
+          <h4>{{room.name}}</h4>
+          <h6>{{room.description}}</h6>
+          <button><a href="/room/{{room.slug}}">Join</a></button>
+          {% if room.creator == user %}
+          <button><a href="delete/{{room.slug}}/">Delete</a></button>
+          {% endif %}
+      </div>
+    <br>
+    {% endfor%}
+  </div>
+
+  <a href="createroom/"><button class="new-post-button">Create New Room</button></a>
+
+  {% block extra_css%}
+  <link rel="stylesheet" href="{% static 'css/chatroom/chatrooms.css' %}">
+{% endblock %}
+
+{% endblock%}
