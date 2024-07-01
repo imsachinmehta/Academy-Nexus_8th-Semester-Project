@@ -1,0 +1,10 @@
+chatapp/migrations/
+portal/migrations/
+.gitignore
+__pycache__/
+env/
+venv/
+.idea
+.env
+
+**/__pycache__/
